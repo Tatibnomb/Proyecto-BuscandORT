@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación de Aulas y Oficinas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de Aula</h1>
+        <label for="aula">Ingresa el número de aula:</label>
+        <input type="text" id="aula" placeholder="Ejemplo: L101" oninput="verificarEntrada()">
+        <button onclick="mostrarPiso()">Consultar</button>
+        
+        <div id="menu-asistentes" style="display: none;">
+            <label for="asistentes">¿A qué oficina de asistentes querés ir?</label>
+            <select id="asistentes" onchange="mostrarPlanoOficina()">
+                <option value="">Seleccione una opción</option>
+                <option value="Ofc. asistentes 1er año">Ofc. asistentes 1er año</option>
+                <option value="Ofc. asistentes 2do año PB">Ofc. asistentes 2do año PB</option>
+                <option value="Ofc. asistentes 2do año 2do piso">Ofc. asistentes 2do año 2do piso</option>
+                <option value="Ofc. asistentes de Humanidades">Ofc. asistentes de Humanidades</option>
+                <option value="Ofc. asistentes de TIC">Ofc. asistentes de TIC</option>
+                <option value="Ofc. asistentes de Medios">Ofc. asistentes de Medios</option>
+            </select>
+        </div>
+        
+        <div id="resultado" class="resultado"></div>
+        
+        <div id="plano-container" class="plano-container">
+            <img id="plano" src="" alt="Plano del Piso" style="display: none;">
+        </div>
+    </div>
+
+    <button onclick="guardarAFavoritos()">Agregar a Favoritos</button>
+    <a href="favoritos.html">Ir a Favoritos</a> <!-- Enlace a la otra pantalla -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@
         <h1>Consulta de aula</h1>
         <label for="aula">Ingresa el número de aula:</label>
         <input type="text" id="aula" placeholder="Ejemplo: L101" oninput="verificarEntrada()">
-        <button onclick="mostrarPiso()">Consultar</button>
+        <button id="boton_consultar" onclick="mostrarPiso()">Consultar</button>
         
         <div id="menu-asistentes" style="display: none;">
             <label for="asistentes">¿A qué oficina de asistentes querés ir?</label>
@@ -34,8 +34,8 @@
         </div>
     </div>
 
-    <button id="agregarFavoritos">Agregar a favoritos</button>
-    <a href="favoritosYrecientes.html">Ir a favoritos</a> <!-- Enlace a la otra pantalla -->
+    <button id="boton_favoritos">Agregar a favoritos</button>
+    <a href="favoritos.html">Ir a favoritos</a> <!-- Enlace a la otra pantalla -->
     <script src="script.js"></script>
 </body>
 </html>

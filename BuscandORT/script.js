@@ -1,9 +1,7 @@
-let agregarFavoritos = document.getElementById("agregarFavoritos")
-agregarFavoritos.addEventListener("click",()=>guardarAFavoritos())
 function verificarEntrada() {
     const aula = document.getElementById('aula').value;
     const menuAsistentes = document.getElementById('menu-asistentes');
-    
+
     if (aula.toLowerCase() === 'ofc. asistentes') {
         menuAsistentes.style.display = 'block';
         document.getElementById('resultado').innerHTML = '';
@@ -52,9 +50,9 @@ function mostrarPiso() {
         case 'Comedor alumnos':
         case 'DAT':
         case 'Cancha':
-            piso = '0 (planta baja)';
-            imagen = 'images/plano_piso0.jpg';
-            break;
+        piso = '0 (planta baja)';
+        imagen = 'images/plano_piso0.jpg';
+        break;
         case 'Lab. humanidades':
         case 'Ofc. humanidades':
         case 'L101':
@@ -86,9 +84,9 @@ function mostrarPiso() {
         case 'L119':
         case 'L120':
         case 'L121':
-            piso = '1';
-            imagen = 'images/plano_piso1.jpg';
-            break;
+        piso = '1';
+        imagen = 'images/plano_piso1.jpg';
+        break;
         case 'L5':
         case 'Ofc.':
         case 'L200':
@@ -115,9 +113,9 @@ function mostrarPiso() {
         case 'L215':
         case 'L216':
         case 'L217':
-            piso = '2';
-            imagen = 'images/plano_piso2.jpg';
-            break;
+        piso = '2';
+        imagen = 'images/plano_piso2.jpg';
+        break;
         case 'Secretaría docente':
         case 'Ofc. de alumnos':
         case 'L300':
@@ -144,22 +142,22 @@ function mostrarPiso() {
         case 'Ofc. medios':
         case 'Control TV':
         case 'Estudio TV':
-            piso = '3';
-            imagen = 'images/plano_piso3.jpg';
-            break;
+        piso = '3';
+        imagen = 'images/plano_piso3.jpg';
+        break;
         default:
-            piso = null;
-            imagen = null;
-            break;
-    }
+        piso = null;
+        imagen = null;
+        break;
+        }        
 
     const resultadoDiv = document.getElementById('resultado');
     const planoImg = document.getElementById('plano');
-
     if (piso && imagen) {
         resultadoDiv.innerHTML = `<p>El aula ${aula} está en el piso ${piso}.</p>`;
         planoImg.src = imagen;
         planoImg.style.display = 'block';
+        actualizarRecientes(aula);
     } else {
         resultadoDiv.innerHTML = `<p>Aula no encontrada. Por favor ingrese un número de aula válido.</p>`;
         planoImg.style.display = 'none';
@@ -175,37 +173,37 @@ function mostrarPlanoOficina() {
 
     switch (oficina) {
         case 'Ofc. asistentes 1er año':
-            piso = '1';
-            imagen = 'images/plano_piso1.jpg';
-            break;
+        piso = '1';
+        imagen = 'images/plano_piso1.jpg';
+        break;
         case 'Ofc. asistentes 2do año PB':
-            piso = '0 (planta baja)';
-            imagen = 'images/plano_piso0.jpg';
-            break;
+        piso = '0 (planta baja)';
+        imagen = 'images/plano_piso0.jpg';
+        break;
         case 'Ofc. asistentes 2do año 2do piso':
-            piso = '2';
-            imagen = 'images/plano_piso2.jpg';
-            break;
+        piso = '2';
+        imagen = 'images/plano_piso2.jpg';
+        break;
         case 'Ofc. asistentes de Humanidades':
-            piso = '1';
-            imagen = 'images/plano_piso1.jpg';
-            break;
+        piso = '1';
+        imagen = 'images/plano_piso1.jpg';
+        break;
         case 'Ofc. asistentes de TIC':
-            piso = '2';
-            imagen = 'images/plano_piso2.jpg';
-            break;
+        piso = '2';
+        imagen = 'images/plano_piso2.jpg';
+        break;
         case 'Ofc. asistentes de Medios':
-            piso = '3';
-            imagen = 'images/plano_piso3.jpg';
-            break;
+        piso = '3';
+        imagen = 'images/plano_piso3.jpg';
+        break;
         default:
-            imagen = null;
-            piso = null;  // Si no se encuentra oficina, no hay piso.
-            break;
-    }
-    
+        imagen = null;
+        piso = null; // Si no se encuentra oficina, no hay piso.
+        break;
+        }        
+
     if (imagen && piso) {
-        resultadoDiv.innerHTML = `<p>La ${oficina} está en el piso ${piso}.</p>`;  // Mostrar el piso en el <p>
+        resultadoDiv.innerHTML = `<p>La ${oficina} está en el piso ${piso}.</p>`;
         planoImg.src = imagen;
         planoImg.style.display = 'block';
     } else {
@@ -213,63 +211,61 @@ function mostrarPlanoOficina() {
         planoImg.style.display = 'none';
     }
 }
+
+let boton_favoritos = document.getElementById('boton_favoritos');
+boton_favoritos.addEventListener('click', guardarAFavoritos);
+
 function guardarAFavoritos() {
     const aula = document.getElementById('aula').value;
-    localStorage.setItem("fav_room", aula)
 
-    // Obtener favoritos existentes en localStorage
-    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-
-    // Evitar duplicados
-    if (!favoritos.includes(aula)) {
-        favoritos.push(aula);
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        alert('Aula agregada a favoritos');
+    if (aula) {
+        let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
+        if (!favoritos.includes(aula)) {
+            favoritos.push(aula);
+            localStorage.setItem('favoritos', JSON.stringify(favoritos));
+            alert('Aula agregada a favoritos');
+            actualizarFavoritos();
+        } else {
+            alert('El aula ya está en favoritos');
+        }
     } else {
-        alert('El aula ya está en favoritos');
+        alert('Por favor ingrese un aula válida');
     }
 }
-document.addEventListener('DOMContentLoaded', () => {
-    const aulaSelect = document.getElementById('aulaSelect');
-    const favoritosSelect = document.getElementById('favoritosSelect'); // Agregamos el select de favoritos
-    const aulaInfo = document.getElementById('aulaInfo');
 
-    let aulasRecientes = JSON.parse(localStorage.getItem('aulasRecientes')) || [];
-    let aulasFavoritas = JSON.parse(localStorage.getItem('favoritos')) || [];
+function actualizarFavoritos() {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    const menuFavoritos = document.getElementById('menu-favoritos');
+    menuFavoritos.innerHTML = ''; // Limpiar antes de agregar
 
-    // Población inicial de opciones de aula
-    const aulas = ['L101', 'L202', 'L303', 'L3', 'L4'];
-    aulas.forEach(aula => {
+    favoritos.forEach(aula => {
         const option = document.createElement('option');
-        option.value = aula;
-        option.textContent = aula;
-        aulaSelect.appendChild(option);
+        option.text = aula;
+        menuFavoritos.add(option);
     });
+}
 
-    // Población del menú de favoritos
-    function mostrarFavoritos() {
-        // Limpiamos las opciones previas del select
-        favoritosSelect.innerHTML = '<option>Selecciona un aula</option>';
+function actualizarRecientes(aula) {
+    let recientes = JSON.parse(localStorage.getItem('recientes')) || [];
+    recientes.push(aula);
+    if (recientes.length > 5) recientes.shift();
+    localStorage.setItem('recientes', JSON.stringify(recientes));
+    actualizarMenuRecientes();
+}
 
-        aulasFavoritas.forEach(aula => {
-            const option = document.createElement('option');
-            option.value = aula;
-            option.textContent = aula;
-            favoritosSelect.appendChild(option);
-        });
-    }
+function actualizarMenuRecientes() {
+    const recientes = JSON.parse(localStorage.getItem('recientes')) || [];
+    const menuRecientes = document.getElementById('menu-recientes');
+    menuRecientes.innerHTML = ''; // Limpiar antes de agregar
 
-    // Mostrar información del aula seleccionada en el menú de favoritos
-    favoritosSelect.addEventListener('change', () => {
-        const aula = favoritosSelect.value;
-        if (aula) {
-            mostrarInfoAula(aula);
-        }
+    recientes.forEach(aula => {
+        const option = document.createElement('option');
+        option.text = aula;
+        menuRecientes.add(option);
     });
+}
 
-    mostrarFavoritos(); // Llamamos a la función para llenar el menú al cargar la página
-
-    function mostrarInfoAula(aula) {
-        aulaInfo.innerHTML = `<p>Información de ${aula}</p>`;
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarFavoritos();
+    actualizarMenuRecientes();
 });

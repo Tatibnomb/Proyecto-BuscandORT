@@ -1,3 +1,5 @@
+let agregarFavoritos = document.getElementById("agregarFavoritos")
+agregarFavoritos.addEventListener("click",()=>guardarAFavoritos())
 function verificarEntrada() {
     const aula = document.getElementById('aula').value;
     const menuAsistentes = document.getElementById('menu-asistentes');
@@ -212,7 +214,8 @@ function mostrarPlanoOficina() {
     }
 }
 function guardarAFavoritos() {
-    const aula = document.getElementById('aulaInput').value;
+    const aula = document.getElementById('aula').value;
+    localStorage.setItem("fav_room", aula)
 
     // Obtener favoritos existentes en localStorage
     let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
@@ -226,3 +229,47 @@ function guardarAFavoritos() {
         alert('El aula ya está en favoritos');
     }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const aulaSelect = document.getElementById('aulaSelect');
+    const favoritosSelect = document.getElementById('favoritosSelect'); // Agregamos el select de favoritos
+    const aulaInfo = document.getElementById('aulaInfo');
+
+    let aulasRecientes = JSON.parse(localStorage.getItem('aulasRecientes')) || [];
+    let aulasFavoritas = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+    // Población inicial de opciones de aula
+    const aulas = ['L101', 'L202', 'L303', 'L3', 'L4'];
+    aulas.forEach(aula => {
+        const option = document.createElement('option');
+        option.value = aula;
+        option.textContent = aula;
+        aulaSelect.appendChild(option);
+    });
+
+    // Población del menú de favoritos
+    function mostrarFavoritos() {
+        // Limpiamos las opciones previas del select
+        favoritosSelect.innerHTML = '<option>Selecciona un aula</option>';
+
+        aulasFavoritas.forEach(aula => {
+            const option = document.createElement('option');
+            option.value = aula;
+            option.textContent = aula;
+            favoritosSelect.appendChild(option);
+        });
+    }
+
+    // Mostrar información del aula seleccionada en el menú de favoritos
+    favoritosSelect.addEventListener('change', () => {
+        const aula = favoritosSelect.value;
+        if (aula) {
+            mostrarInfoAula(aula);
+        }
+    });
+
+    mostrarFavoritos(); // Llamamos a la función para llenar el menú al cargar la página
+
+    function mostrarInfoAula(aula) {
+        aulaInfo.innerHTML = `<p>Información de ${aula}</p>`;
+    }
+});

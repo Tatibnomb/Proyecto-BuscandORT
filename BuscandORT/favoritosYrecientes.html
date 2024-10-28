@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de favoritos y recientes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Favoritos y recientes</h1>
+
+    <!-- Menú desplegable para favoritos -->
+    <h3>Favoritos de aulas</h3>
+    <label for="favoritosSelect">Ir a favoritos:</label>
+    <select id="favoritosSelect">
+        <option>Selecciona un aula</option>
+    </select>
+    <div id="aulaInfo"></div>
+
+    <!-- Menú desplegable para recientes -->
+    <h3>Aulas recientes</h3>
+    <select id="recientes">
+        <option value="">Selecciona un aula reciente</option>
+    </select>
+
+    <!-- Contenedor para mostrar los detalles del aula seleccionada -->
+    <div id="resultado"></div>
+
+    <a href="index.html">Volver a la consulta de aulas</a> <!-- Enlace a la pantalla principal -->
+    <script src="script.js"></script>
+</body>
+</html>

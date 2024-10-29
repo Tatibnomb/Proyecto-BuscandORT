@@ -284,3 +284,50 @@ function mostrarPlanoYPiso(aula) {
     // Aquí iría tu código para mostrar el plano y piso correspondiente
     console.log(`Mostrando información de aula: ${aula}`);
 }
+// En index.html o en un archivo JavaScript vinculado
+document.getElementById("consultarBtn").addEventListener("click", function() {
+    const aulaInput = document.getElementById("aulaInput").value.trim();
+
+    if (aulaInput) {
+        // Obtener el array de aulas recientes del localStorage
+        let aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
+
+        // Agregar la nueva aula al inicio del array
+        aulasRecientes.unshift(aulaInput);
+
+        // Mantener solo las últimas 5 aulas
+        if (aulasRecientes.length > 5) {
+            aulasRecientes = aulasRecientes.slice(0, 5);
+        }
+
+        // Guardar el array actualizado en el localStorage
+        localStorage.setItem("aulasRecientes", JSON.stringify(aulasRecientes));
+    }
+});
+
+function actualizarRecientes(aula) {
+    // Obtener el array de aulas recientes del localStorage
+    let aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
+
+    // Agregar la nueva aula al inicio del array
+    aulasRecientes.unshift(aula);
+
+    // Mantener solo las últimas 5 aulas
+    if (aulasRecientes.length > 5) {
+        aulasRecientes = aulasRecientes.slice(0, 5);
+    }
+
+    // Guardar el array actualizado en el localStorage
+    localStorage.setItem("aulasRecientes", JSON.stringify(aulasRecientes));
+}
+document.getElementById("consultarBtn").addEventListener("click", function() {
+    const aulaInput = document.getElementById("aulaInput").value.trim();
+
+    if (aulaInput) {
+        // Llama a la función para actualizar las aulas recientes
+        actualizarRecientes(aulaInput);
+
+        // Aquí puedes llamar a la función que muestra el piso y plano si tienes una definida
+        mostrarPiso(aulaInput); // Asegúrate de tener esta función definida si la necesitas
+    }
+});

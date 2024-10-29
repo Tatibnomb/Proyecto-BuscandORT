@@ -18,5 +18,24 @@
     <a href="index.html">Volver a la página de consulta</a>
 
     <script src="recientes.js"></script>
+    <!-- En recientes.html -->
+<select id="aulasRecientesMenu">
+    <option disabled selected>Selecciona un aula reciente</option>
+</select>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
+    const menu = document.getElementById("aulasRecientesMenu");
+
+    // Agregar cada aula reciente como una opción en el menú desplegable
+    aulasRecientes.forEach(aula => {
+        const option = document.createElement("option");
+        option.value = aula;
+        option.textContent = aula;
+        menu.appendChild(option);
+    });
+});
+</script>
 </body>
 </html>

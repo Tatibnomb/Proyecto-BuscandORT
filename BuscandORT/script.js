@@ -245,27 +245,42 @@ function actualizarFavoritos() {
     });
 }
 
-function actualizarRecientes(aula) {
-    let recientes = JSON.parse(localStorage.getItem('recientes')) || [];
-    recientes.push(aula);
-    if (recientes.length > 5) recientes.shift();
-    localStorage.setItem('recientes', JSON.stringify(recientes));
-    actualizarMenuRecientes();
+// Elementos de la página
+const consultarBtn = document.getElementById("consultarBtn"); // Botón Consultar
+const aulaInput = document.getElementById("aulaInput"); // Input del aula
+
+// Función para guardar aula reciente
+function guardarAulaReciente(aula) {
+    // Obtiene las aulas recientes del localStorage
+    let recientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
+
+    // Agrega el aula al inicio del array y elimina si supera 5 elementos
+    recientes.unshift(aula);
+    if (recientes.length > 5) {
+        recientes.pop();
+    }
+
+    // Guarda la lista actualizada en el localStorage
+    localStorage.setItem("aulasRecientes", JSON.stringify(recientes));
 }
 
-function actualizarMenuRecientes() {
-    const recientes = JSON.parse(localStorage.getItem('recientes')) || [];
-    const menuRecientes = document.getElementById('menu-recientes');
-    menuRecientes.innerHTML = ''; // Limpiar antes de agregar
+// Evento del botón Consultar
+consultarBtn.addEventListener("click", () => {
+    const aula = aulaInput.value.trim();
 
-    recientes.forEach(aula => {
-        const option = document.createElement('option');
-        option.text = aula;
-        menuRecientes.add(option);
-    });
-}
+    if (aula) {
+        // Llama a la función para guardar el aula como reciente
+        guardarAulaReciente(aula);
 
-document.addEventListener('DOMContentLoaded', () => {
-    actualizarFavoritos();
-    actualizarMenuRecientes();
+        // Lógica adicional para mostrar el plano y piso correspondiente
+        mostrarPlanoYPiso(aula);
+    } else {
+        alert("Por favor, ingresa un aula válida.");
+    }
 });
+
+// Función que muestra el plano y piso correspondiente
+function mostrarPlanoYPiso(aula) {
+    // Aquí iría tu código para mostrar el plano y piso correspondiente
+    console.log(`Mostrando información de aula: ${aula}`);
+}

@@ -7,22 +7,12 @@
 </head>
 <body>
     <h1>Aulas recientes</h1>
-
     <label for="recientes">Aulas recientes:</label>
-    <select id="recientes" onchange="redirigirAulaReciente()">
-        <option value="">Selecciona un aula</option>
-        <!-- Opciones se cargarán desde localStorage -->
-    </select>
-
-    <br>
-    <a href="index.html">Volver a la página de consulta</a>
-
-    <script src="recientes.js"></script>
-    <!-- En recientes.html -->
 <select id="aulasRecientesMenu">
     <option disabled selected>Selecciona un aula reciente</option>
 </select>
-
+<br>
+    <a href="index.html">Volver a la página de consulta</a>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];

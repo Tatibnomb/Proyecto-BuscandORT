@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favoritos de aulas</title>
+    <title>Favoritos</title>
 </head>
 <body>
-    <h1>Favoritos de aulas</h1>
-
+    <h1>Aulas favoritas</h1>
     <!-- Menú desplegable de favoritos -->
     <label for="favoritos">Aulas favoritas:</label>
-    <select id="favoritos">
-       <option value="">Selecciona un aula</option>
-       <!-- Aquí se cargarán las aulas favoritas desde localStorage -->
+    <select id="menu-favoritos">
+        <option value="">Selecciona un aula</option>
+        <!-- Aquí se cargarán las aulas favoritas desde localStorage -->
     </select>
 
+    <!-- Elementos para mostrar el piso y el plano -->
+    <div id="resultado"></div>
+    <img id="plano" src="" alt="Plano del aula" style="display:none;">
+    
     <br>
     <a href="index.html">Volver a la página de consulta</a>
 

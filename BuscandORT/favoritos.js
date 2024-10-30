@@ -1,169 +1,60 @@
-// Al cargar la página, mostrtamos los favoritos guardados en localStorage
+// Al cargar la página, mostramos los favoritos guardados en localStorage
 window.onload = function() {
     cargaraFavoritos();
 };
 
 // Función para cargar las aulas favoritas desde localStorage
-function cargaraFavoritos() {
+function cargarFavoritos() {
     const selectFavoritos = document.getElementById('favoritos');
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
     favoritos.forEach(favorito => {
         const option = document.createElement('option');
-        option.value = favorito;
-        option.textContent = favorito;
+        option.value = favorito.nombre; // Asegúrate de que `nombre` es el campo correcto
+        option.textContent = favorito.nombre;
         selectFavoritos.appendChild(option);
     });
 }
 
-// Función para redirigir a la página de consulta con el aula seleccionada
 function redirigirAula() {
     const selectFavoritos = document.getElementById('favoritos');
     const aulaSeleccionada = selectFavoritos.value;
-
+    
     if (aulaSeleccionada) {
-        // Redirigir a la página de consulta con el aula seleccionada
-        window.location.href = `index.html?aula=${aulaSeleccionada}`;
+        const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+        const aulaInfo = favoritos.find(aula => aula.nombre === aulaSeleccionada);
+
+        if (aulaInfo) {
+            const { piso, imagen } = aulaInfo;
+            alert(`El aula ${aulaSeleccionada} está en el piso ${piso}.`);
+            // Aquí puedes mostrar la imagen del plano si deseas
+            const planoImg = document.getElementById('plano');
+            planoImg.src = imagen;
+            planoImg.style.display = 'block'; // Asegúrate de que el contenedor de imagen esté visible
+        }
     }
 }
+function guardarAFavoritos() {
+    const aula = document.getElementById('aula').value;
+    let piso, imagen;
 
-function redirigirAula() {
-    const selectFavoritos = document.getElementById('favoritos');
-    const aulaSeleccionada = selectFavoritos.value;
-
-    if (aulaSeleccionada) {
-        // Determina el piso y la imagen del aula seleccionada
-        let piso, imagen;
-
-        switch (aulaSeleccionada) {
-            case 'L001':
-            case 'L002':
-            case 'Ofc. asistentes':
-            case 'Admisión':
-            case 'L004':
-            case 'L006':
-            case 'L007':
-            case 'L008':
-            case 'Coord. Cs. Sociales':
-            case 'Coord. Ed. Judía':
-            case 'Ofc. asistentes':
-            case 'L009':
-            case 'L010':
-            case 'Baños':
-            case 'Templo':
-            case 'L011':
-            case 'Aula de robótica educ.':
-            case 'Ofc. inglés':
-            case 'Lab. campus':
-            case 'L014':
-            case 'Comedor alumnos':
-            case 'DAT':
-            case 'Cancha':
+    // Define la lógica para determinar el piso y la imagen según el aula
+    switch (aula) {
+        case 'L001':
             piso = '0 (planta baja)';
             imagen = 'images/plano_piso0.jpg';
             break;
-            case 'Lab. humanidades':
-            case 'Ofc. humanidades':
-            case 'L101':
-            case 'L102':
-            case 'L103':
-            case 'L104':
-            case 'L105':
-            case 'L106':
-            case 'L107':
-            case 'L108':
-            case 'L109':
-            case 'Dirección de estudios y pedagogía':
-            case 'Sala de docentes 2.0':
-            case 'L111':
-            case 'Dirección educativa del nivel medio':
-            case 'L112':
-            case 'L113':
-            case 'L114':
-            case 'L115':
-            case 'Ofc. asistentes 1° año':
-            case 'Baños prof.':
-            case 'Coordinación operativa':
-            case 'Baños hombres':
-            case 'Baños disc.':
-            case 'L116':
-            case 'Coord. 1° año':
-            case 'L117':
-            case 'L118':
-            case 'L119':
-            case 'L120':
-            case 'L121':
+        case 'L101':
             piso = '1';
             imagen = 'images/plano_piso1.jpg';
             break;
-            case 'L5':
-            case 'Ofc.':
-            case 'L200':
-            case 'L201':
-            case 'L202':
-            case 'L203':
-            case 'L204':
-            case 'L205':
-            case 'L206':
-            case 'L207':
-            case 'L208':
-            case 'Ofc.':
-            case 'Ofc.':
-            case 'Sala prof.':
-            case 'L1':
-            case 'L2':
-            case 'L3':
-            case 'L4':
-            case 'Pañol TIC':
-            case 'L213':
-            case 'Ofc.':
-            case 'Baño mixto':
-            case 'L214':
-            case 'L215':
-            case 'L216':
-            case 'L217':
-            piso = '2';
-            imagen = 'images/plano_piso2.jpg';
-            break;
-            case 'Secretaría docente':
-            case 'Ofc. de alumnos':
-            case 'L300':
-            case 'L301':
-            case 'L302':
-            case 'L303':
-            case 'L304':
-            case 'L305':
-            case 'L306':
-            case 'L307':
-            case 'L308':
-            case 'Baños':
-            case 'Ofc. asistentes':
-            case 'Lab.':
-            case 'L309':
-            case 'L310':
-            case 'Ofc. asistentes':
-            case 'L311':
-            case 'L312':
-            case 'Radio':
-            case 'L313':
-            case 'L314':
-            case 'Pañol medios':
-            case 'Ofc. medios':
-            case 'Control TV':
-            case 'Estudio TV':
-            piso = '3';
-            imagen = 'images/plano_piso3.jpg';
-            break;
-            default:
-            piso = null;
-            imagen = null;
-            break;
-            }
-
-        if (piso && imagen) {
-            mostrarPantallaInfo(aulaSeleccionada, piso, imagen);
-        } else {
-            alert('Aula no encontrada. Por favor selecciona una aula válida.');
-        }
+        // Agrega más casos según sea necesario
+        default:
+            return; // Si no se encuentra el aula, no hagas nada
     }
+
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    favoritos.push({ nombre: aula, piso: piso, imagen: imagen });
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+    alert('Aula agregada a favoritos');
 }

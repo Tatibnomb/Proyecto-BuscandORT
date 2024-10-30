@@ -305,3 +305,14 @@ document.getElementById("consultarBtn").addEventListener("click", function() {
         actualizarRecientes(aulaInput);
     }
 });
+
+
+
+function actualizarRecientes (aula){
+    let recientes = JSON.parse(localStorage.getItem('recientes') || '[]');      
+   if (!recientes.includes(aula)) {
+    recientes.push(aula)
+    localStorage.setItem("recientes", JSON.stringify(recientes))
+   }
+    console.log(aula,hay, recientes)
+}

@@ -13,9 +13,13 @@
 </select>
 <br>
     <a href="index.html">Volver a la página de consulta</a>
+    <div id="resultado"></div>
+    <img src="" id="plano" alt="">
+    <script src="recientes.js"></script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    const aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
+    const aulasRecientes = JSON.parse(localStorage.getItem("recientes")) || [];
     const menu = document.getElementById("aulasRecientesMenu");
 
     // Agregar cada aula reciente como una opción en el menú desplegable

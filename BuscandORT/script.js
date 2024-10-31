@@ -318,7 +318,7 @@ function guardarAulaReciente(aula) {
 
 // Evento del botón Consultar
 consultarBtn.addEventListener("click", () => {
-    const aula = aulaInput.value.trim();
+    const aula = aulaInput.value;
 
 
 

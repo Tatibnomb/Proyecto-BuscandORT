@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del aula</title>
+</head>
+<body>
+    <h1>Información del aula</h1>
+    <div id="infoAula"></div>
+    <img id="planoImagen" src="" alt="Plano del Aula" style="display:none;">
+    <br>
+    <a href="index.html">Volver a la página de consulta</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const aulaInfo = JSON.parse(localStorage.getItem('aulaConsultada'));
+            if (aulaInfo) {
+                document.getElementById('infoAula').innerHTML = `<p>El aula ${aulaInfo.aula} está en el piso ${aulaInfo.piso}.</p>`;
+                const planoImagen = document.getElementById('planoImagen');
+                planoImagen.src = aulaInfo.imagen;
+                planoImagen.style.display = 'block';
+            } else {
+                document.getElementById('infoAula').innerHTML = `<p>No se encontró información sobre el aula.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

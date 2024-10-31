@@ -159,13 +159,11 @@ function mostrarPiso() {
     const resultadoDiv = document.getElementById('resultado');
     const planoImg = document.getElementById('plano');
     if (piso && imagen) {
-        resultadoDiv.innerHTML = `<p>El aula ${aula} está en el piso ${piso}.</p>`;
-        planoImg.src = imagen;
-        planoImg.style.display = 'block';
-        actualizarRecientes(aula);
+        // Guardar información en localStorage y redirigir a infoAula.html
+        localStorage.setItem('aulaConsultada', JSON.stringify({ aula, piso, imagen }));
+        window.location.href = 'infoAula.html';
     } else {
-        resultadoDiv.innerHTML = `<p>Aula no encontrada. Por favor ingrese un número de aula válido.</p>`;
-        planoImg.style.display = 'none';
+        alert("Aula no encontrada. Por favor ingrese un número de aula válido.");
     }
 }
 

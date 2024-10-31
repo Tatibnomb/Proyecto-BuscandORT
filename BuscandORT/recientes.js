@@ -5,6 +5,8 @@ function mostrarPiso() {
     let imagen;
 
 
+
+
     switch (aula) {
         case 'L001':
         case 'L002':
@@ -129,6 +131,7 @@ function mostrarPiso() {
         imagen = null;
         break;
         }        
+
 
     const resultadoDiv = document.getElementById('resultado');
     const planoImg = document.getElementById('plano');

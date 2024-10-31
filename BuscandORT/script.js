@@ -3,6 +3,8 @@ function verificarEntrada() {
     const menuAsistentes = document.getElementById('menu-asistentes');
 
 
+
+
     if (aula.toLowerCase() === 'ofc. asistentes') {
         menuAsistentes.style.display = 'block';
         document.getElementById('resultado').innerHTML = '';
@@ -15,11 +17,15 @@ function verificarEntrada() {
 }
 
 
+
+
 function mostrarPiso() {
     const aula = document.getElementById('aula').value;
     const menuAsistentes = document.getElementById('menu-asistentes');
     let piso;
     let imagen;
+
+
 
 
     if (aula.toLowerCase() === 'ofc. asistentes') {
@@ -28,6 +34,8 @@ function mostrarPiso() {
     } else {
         menuAsistentes.style.display = 'none';
     }
+
+
 
 
     switch (aula) {
@@ -156,6 +164,8 @@ function mostrarPiso() {
         }        
 
 
+
+
     const resultadoDiv = document.getElementById('resultado');
     const planoImg = document.getElementById('plano');
     if (piso && imagen) {
@@ -168,12 +178,16 @@ function mostrarPiso() {
 }
 
 
+
+
 function mostrarPlanoOficina() {
     const oficina = document.getElementById('asistentes').value;
     const planoImg = document.getElementById('plano');
     const resultadoDiv = document.getElementById('resultado');
     let imagen;
     let piso;
+
+
 
 
     switch (oficina) {
@@ -208,6 +222,8 @@ function mostrarPlanoOficina() {
         }        
 
 
+
+
     if (imagen && piso) {
         resultadoDiv.innerHTML = `<p>La ${oficina} está en el piso ${piso}.</p>`;
         planoImg.src = imagen;
@@ -219,12 +235,18 @@ function mostrarPlanoOficina() {
 }
 
 
+
+
 let boton_favoritos = document.getElementById('boton_favoritos');
 boton_favoritos.addEventListener('click', guardarAFavoritos);
 
 
+
+
 function guardarAFavoritos() {
     const aula = document.getElementById('aula').value;
+
+
 
 
     if (aula) {
@@ -243,10 +265,14 @@ function guardarAFavoritos() {
 }
 
 
+
+
 function actualizarFavoritos() {
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
     const menuFavoritos = document.getElementById('menu-favoritos');
     menuFavoritos.innerHTML = ''; // Limpiar antes de agregar
+
+
 
 
     favoritos.forEach(aula => {
@@ -257,15 +283,21 @@ function actualizarFavoritos() {
 }
 
 
+
+
 // Elementos de la página
 const consultarBtn = document.getElementById("consultarBtn"); // Botón Consultar
 const aulaInput = document.getElementById("aulaInput"); // Input del aula
+
+
 
 
 // Función para guardar aula reciente
 function guardarAulaReciente(aula) {
     // Obtiene las aulas recientes del localStorage
     let recientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
+
+
 
 
     // Agrega el aula al inicio del array y elimina si supera 5 elementos
@@ -275,14 +307,20 @@ function guardarAulaReciente(aula) {
     }
 
 
+
+
     // Guarda la lista actualizada en el localStorage
     localStorage.setItem("aulasRecientes", JSON.stringify(recientes));
 }
 
 
+
+
 // Evento del botón Consultar
 consultarBtn.addEventListener("click", () => {
     const aula = aulaInput.value.trim();
+
+
 
 
     if (aula) {
@@ -294,9 +332,13 @@ consultarBtn.addEventListener("click", () => {
 });
 
 
+
+
 // En index.html o en un archivo JavaScript vinculado
 document.getElementById("consultarBtn").addEventListener("click", function() {
     const aulaInput = document.getElementById("aulaInput").value.trim();
+
+
 
 
     if (aulaInput) {
@@ -304,8 +346,12 @@ document.getElementById("consultarBtn").addEventListener("click", function() {
         let aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
 
 
+
+
         // Agregar la nueva aula al inicio del array
         aulasRecientes.unshift(aulaInput);
+
+
 
 
         // Mantener solo las últimas 5 aulas
@@ -314,14 +360,20 @@ document.getElementById("consultarBtn").addEventListener("click", function() {
         }
 
 
+
+
         // Guardar el array actualizado en el localStorage
         localStorage.setItem("aulasRecientes", JSON.stringify(aulasRecientes));
     }
 });
 
 
+
+
 document.getElementById("consultarBtn").addEventListener("click", function() {
     const aulaInput = document.getElementById("aulaInput").value.trim();
+
+
 
 
     if (aulaInput) {
@@ -329,6 +381,7 @@ document.getElementById("consultarBtn").addEventListener("click", function() {
         actualizarRecientes(aulaInput);
     }
 });
+
 
 function actualizarRecientes (aula){
     let recientes = JSON.parse(localStorage.getItem('recientes') || '[]');      

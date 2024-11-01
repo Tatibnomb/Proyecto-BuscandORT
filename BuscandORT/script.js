@@ -16,17 +16,11 @@ function verificarEntrada() {
     }
 }
 
-
-
-
 function mostrarPiso() {
     const aula = document.getElementById('aula').value;
     const menuAsistentes = document.getElementById('menu-asistentes');
     let piso;
     let imagen;
-
-
-
 
     if (aula.toLowerCase() === 'ofc. asistentes') {
         menuAsistentes.style.display = 'block';
@@ -34,9 +28,6 @@ function mostrarPiso() {
     } else {
         menuAsistentes.style.display = 'none';
     }
-
-
-
 
     switch (aula) {
         case 'L001':
@@ -163,9 +154,6 @@ function mostrarPiso() {
         break;
         }        
 
-
-
-
     const resultadoDiv = document.getElementById('resultado');
     const planoImg = document.getElementById('plano');
     if (piso && imagen) {
@@ -178,18 +166,12 @@ function mostrarPiso() {
     }
 }
 
-
-
-
 function mostrarPlanoOficina() {
     const oficina = document.getElementById('asistentes').value;
     const planoImg = document.getElementById('plano');
     const resultadoDiv = document.getElementById('resultado');
     let imagen;
     let piso;
-
-
-
 
     switch (oficina) {
         case 'Ofc. asistentes 1er año':
@@ -222,9 +204,6 @@ function mostrarPlanoOficina() {
         break;
         }        
 
-
-
-
     if (imagen && piso) {
         resultadoDiv.innerHTML = `<p>La ${oficina} está en el piso ${piso}.</p>`;
         planoImg.src = imagen;
@@ -235,20 +214,11 @@ function mostrarPlanoOficina() {
     }
 }
 
-
-
-
 let boton_favoritos = document.getElementById('boton_favoritos');
 boton_favoritos.addEventListener('click', guardarAFavoritos);
 
-
-
-
 function guardarAFavoritos() {
     const aula = document.getElementById('aula').value;
-
-
-
 
     if (aula) {
         let favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
@@ -265,16 +235,10 @@ function guardarAFavoritos() {
     }
 }
 
-
-
-
 function actualizarFavoritos() {
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
     const menuFavoritos = document.getElementById('menu-favoritos');
     menuFavoritos.innerHTML = ''; // Limpiar antes de agregar
-
-
-
 
     favoritos.forEach(aula => {
         const option = document.createElement('option');
@@ -283,31 +247,11 @@ function actualizarFavoritos() {
     });
 }
 
-
-
-
 // Elementos de la página
 const consultarBtn = document.getElementById("consultarBtn"); // Botón Consultar
 const aulaInput = document.getElementById("aulaInput"); // Input del aula
 
-
-
-
 // Función para guardar aula reciente
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function actualizarRecientes (aula){
     let recientes = JSON.parse(localStorage.getItem('recientes') || '[]');      

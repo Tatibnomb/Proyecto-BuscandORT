@@ -130,7 +130,7 @@ function mostrarPiso() {
         piso = null;
         imagen = null;
         break;
-        }        
+        }
 
 
     const resultadoDiv = document.getElementById('resultado');

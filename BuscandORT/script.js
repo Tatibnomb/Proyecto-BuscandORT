@@ -2,9 +2,6 @@ function verificarEntrada() {
     const aula = document.getElementById('aula').value;
     const menuAsistentes = document.getElementById('menu-asistentes');
 
-
-
-
     if (aula.toLowerCase() === 'ofc. asistentes') {
         menuAsistentes.style.display = 'block';
         document.getElementById('resultado').innerHTML = '';
@@ -202,7 +199,7 @@ function mostrarPlanoOficina() {
         imagen = null;
         piso = null; // Si no se encuentra oficina, no hay piso.
         break;
-        }        
+        }
 
     if (imagen && piso) {
         resultadoDiv.innerHTML = `<p>La ${oficina} está en el piso ${piso}.</p>`;

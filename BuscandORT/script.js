@@ -170,6 +170,7 @@ function mostrarPiso() {
     const planoImg = document.getElementById('plano');
     if (piso && imagen) {
         // Guardar información en localStorage y redirigir a infoAula.html
+        actualizarRecientes(aula)
         localStorage.setItem('aulaConsultada', JSON.stringify({ aula, piso, imagen }));
         window.location.href = 'infoAula.html';
     } else {
@@ -293,94 +294,19 @@ const aulaInput = document.getElementById("aulaInput"); // Input del aula
 
 
 // Función para guardar aula reciente
-function guardarAulaReciente(aula) {
-    // Obtiene las aulas recientes del localStorage
-    let recientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
 
 
 
 
-    // Agrega el aula al inicio del array y elimina si supera 5 elementos
-    recientes.unshift(aula);
-    if (recientes.length > 5) {
-        recientes.pop();
-    }
 
 
 
 
-    // Guarda la lista actualizada en el localStorage
-    localStorage.setItem("aulasRecientes", JSON.stringify(recientes));
-}
 
 
 
 
-// Evento del botón Consultar
-consultarBtn.addEventListener("click", () => {
-    const aula = aulaInput.value;
 
-
-
-
-    if (aula) {
-        // Llama a la función para guardar el aula como reciente
-        guardarAulaReciente(aula);
-    } else {
-        alert("Por favor, ingresa un aula válida.");
-    }
-});
-
-
-
-
-// En index.html o en un archivo JavaScript vinculado
-document.getElementById("consultarBtn").addEventListener("click", function() {
-    const aulaInput = document.getElementById("aulaInput").value.trim();
-
-
-
-
-    if (aulaInput) {
-        // Obtener el array de aulas recientes del localStorage
-        let aulasRecientes = JSON.parse(localStorage.getItem("aulasRecientes")) || [];
-
-
-
-
-        // Agregar la nueva aula al inicio del array
-        aulasRecientes.unshift(aulaInput);
-
-
-
-
-        // Mantener solo las últimas 5 aulas
-        if (aulasRecientes.length > 5) {
-            aulasRecientes = aulasRecientes.slice(0, 5);
-        }
-
-
-
-
-        // Guardar el array actualizado en el localStorage
-        localStorage.setItem("aulasRecientes", JSON.stringify(aulasRecientes));
-    }
-});
-
-
-
-
-document.getElementById("consultarBtn").addEventListener("click", function() {
-    const aulaInput = document.getElementById("aulaInput").value.trim();
-
-
-
-
-    if (aulaInput) {
-        // Llama a la función para actualizar las aulas recientes
-        actualizarRecientes(aulaInput);
-    }
-});
 
 
 function actualizarRecientes (aula){
@@ -389,5 +315,5 @@ function actualizarRecientes (aula){
     recientes.push(aula)
     localStorage.setItem("recientes", JSON.stringify(recientes))
    }
-    console.log(aula,hay, recientes)
+    console.log("Aula cargada")
 }

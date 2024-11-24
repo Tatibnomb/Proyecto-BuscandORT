@@ -215,14 +215,11 @@ function mostrarPlanoOficina() {
         planoImg.style.display = 'none';
     }
 }
-<<<<<<< Updated upstream
 
 let boton_favoritos = document.getElementById('boton_favoritos');
 boton_favoritos.addEventListener('click', guardarAFavoritos);
-=======
 let boton_favoritos = document.getElementById('boton_favoritos');
 boton_favoritos.addEventListener('click', () => guardarAFavoritos());
->>>>>>> Stashed changes
 
 function guardarAFavoritos() {
     const aula = document.getElementById('aula').value;
